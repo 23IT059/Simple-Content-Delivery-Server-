@@ -4,15 +4,14 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-// Middleware to log user visits
+
 app.use((req, res, next) => {
     const logEntry = `${new Date().toISOString()} - ${req.ip}\n`;
     fs.appendFileSync('visits.log', logEntry);
     next();
 });
 
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // API to retrieve logs
 app.get('/logs', (req, res) => {
